@@ -1,6 +1,6 @@
 {
   "name": "word-aligner-lib",
-  "version": "0.9-beta",
+  "version": "0.9.1-beta",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "repository": "https://github.com/unfoldingWord-dev/word-aligner-lib.git",
