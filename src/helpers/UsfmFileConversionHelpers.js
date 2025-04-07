@@ -2,15 +2,8 @@
 import usfmjs from 'usfm-js';
 import cloneDeep from "lodash.clonedeep";
 import {getVerseAlignments, getWordCountInVerse} from "./alignmentHelpers";
-
-/**
- * test to see if verse is a verseSpan
- * @param {string|number} verse
- * @return {boolean}
- */
-export function isVerseSpan(verse) {
-  return verse.toString().includes('-');
-}
+import { getBestVerseFromBook } from '../helpers/verseHelpers'
+import { removeUsfmMarkers } from './usfmHelpers'
 
 /**
  * called in case of invalid alignment that is not valid for the verse span, Sets alignment occurrence to high value
@@ -267,3 +260,24 @@ export const getUsfmForVerseContent = (verseData) => {
   verseData = removeMilestonesAndWordMarkers(verseData);
   return convertVerseDataToUSFM(verseData);
 };
+
+/**
+ * Retrieves the text of the best match verse from targetBible.
+ *
+ * @param {Object} targetBible - The Bible object from which the verse text is to be retrieved.
+ * @param {Object} reference - An object containing the chapter and verse information.
+ * @param {number} reference.chapter - The chapter number of the desired verse.
+ * @param {number} reference.verse - The verse number to retrieve from the specified chapter.
+ * @return {string|null} The text content of the specified verse after processing for proper format.
+ */
+export function getVerseTextFromBible(targetBible, reference) {
+  let verseText = getBestVerseFromBook(targetBible, reference?.chapter, reference?.verse)
+  if (verseText) {
+    if (typeof verseText !== 'string') {
+      console.log(`updateContext- verse data is not text`)
+      verseText = getUsfmForVerseContent(verseText)
+    }
+    return removeUsfmMarkers(verseText)
+  }
+  return null
+}

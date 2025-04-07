@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import pkg from './package.json'
 
@@ -7,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const shouldMinify = process.env.MINIFY !== 'false' // Check environment variable
 
   return {
-    plugins: [react()],
+    plugins: [],
     build: {
       minify: shouldMinify,
       sourcemap: true,
