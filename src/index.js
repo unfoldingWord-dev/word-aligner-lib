@@ -1,6 +1,5 @@
 import * as AlignmentHelpers from './helpers/alignmentHelpers'
 import * as bibleHelpers from './helpers/bibleHelpers'
-import * as fileHelpers from './helpers/fileHelpers'
 import * as lexiconHelpers from './helpers/lexiconHelpers'
 import * as migrateOriginalLanguageHelpers from './helpers/migrateOriginalLanguageHelpers'
 import * as selectionsHelpers from './helpers/selectionsHelpers'
@@ -13,7 +12,6 @@ import * as verseObjects from './helpers/verseObjects'
 export {
   AlignmentHelpers,
   bibleHelpers,
-  fileHelpers,
   lexiconHelpers,
   migrateOriginalLanguageHelpers,
   selections,

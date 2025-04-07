@@ -2,6 +2,8 @@ import usfmjs from 'usfm-js';
 import { getVerses } from 'bible-reference-range';
 import { normalizeString } from './stringHelpers';
 import { isVerseWithinVerseSpan } from './groupDataHelpers';
+import {removeUsfmMarkers} from "./usfmHelpers";
+import {getUsfmForVerseContent} from "./UsfmFileConversionHelpers";
 
 /**
  * test to see if verse is a verseSpan
@@ -207,4 +209,26 @@ export function getVerseText(bookData, contextId, addVerseRef=false) {
   }
 
   return { unfilteredVerseText, verseText };
+}
+
+
+/**
+ * Retrieves the text of the best match verse from targetBible.
+ *
+ * @param {Object} targetBible - The Bible object from which the verse text is to be retrieved.
+ * @param {Object} reference - An object containing the chapter and verse information.
+ * @param {number} reference.chapter - The chapter number of the desired verse.
+ * @param {number} reference.verse - The verse number to retrieve from the specified chapter.
+ * @return {string|null} The text content of the specified verse after processing for proper format.
+ */
+export function getVerseTextFromBible(targetBible, reference) {
+  let verseText = getBestVerseFromBook(targetBible, reference?.chapter, reference?.verse)
+  if (verseText) {
+    if (typeof verseText !== 'string') {
+      console.log(`updateContext- verse data is not text`)
+      verseText = getUsfmForVerseContent(verseText)
+    }
+    return removeUsfmMarkers(verseText)
+  }
+  return null
 }

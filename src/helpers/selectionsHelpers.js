@@ -2,6 +2,7 @@ import usfm from 'usfm-js';
 import isEqual from 'deep-equal'
 import { getUsfmForVerseContent } from './UsfmFileConversionHelpers'
 import { checkSelectionOccurrences } from '../utils/selections'
+import {getVerseText} from "./verseHelpers";
 
 /**
  * validate selections in verse string or object
