@@ -364,3 +364,41 @@ export const sameContext = (contextId1, contextId2) => {
   }
   return false;
 };
+
+export function flattenGroupData(groupsData) {
+  let mergedGroups = { }
+
+  for (const category of Object.keys(groupsData)) {
+    const groups = groupsData[category]
+    for (const groupId of Object.keys(groups)) {
+      const group = groups[groupId]
+      const newGroup = group.map(item => {
+        const newItem = {...item} // shallow copy
+        newItem.category = category
+        return newItem
+      })
+      mergedGroups[groupId] = newGroup
+    }
+  }
+
+  let sortedGroups = { }
+  for (const key of Object.keys(mergedGroups).sort()) {
+    sortedGroups[key] = mergedGroups[key]
+  }
+
+  return sortedGroups;
+}
+
+export function extractGroupData(data) {
+  const groupData = {}
+  for (const catagory of Object.keys(data)) {
+    if (catagory !== 'manifest') { // skip over manifest
+      let categoryData = data[catagory]
+      if (categoryData?.groups) { // if grouped, then drill down
+        categoryData = categoryData.groups
+      }
+      groupData[catagory] = categoryData || {}
+    }
+  }
+  return groupData
+}
