@@ -6,12 +6,12 @@ import {
   parseUsfmToWordAlignerData,
   updateAlignmentsToTargetVerse,
   updateAlignmentsToTargetVerseWithOriginal,
-} from "../utils/alignmentHelpers";
-import {removeUsfmMarkers, usfmVerseToJson} from "../utils/usfmHelpers";
+} from "../helpers/alignmentHelpers";
+import {removeUsfmMarkers, usfmVerseToJson} from "../helpers/usfmHelpers";
 import Lexer from "wordmap-lexer";
-import {migrateTargetAlignmentsToOriginal} from "../utils/migrateOriginalLanguageHelpers";
-import {convertVerseDataToUSFM, getUsfmForVerseContent} from "../utils/UsfmFileConversionHelpers";
-import path from "path-extra";
+import {migrateTargetAlignmentsToOriginal} from "../helpers/migrateOriginalLanguageHelpers";
+import {convertVerseDataToUSFM, getUsfmForVerseContent} from "../helpers/UsfmFileConversionHelpers";
+import path from "path";
 import fs from 'fs-extra';
 import cloneDeep from "lodash.clonedeep";
 

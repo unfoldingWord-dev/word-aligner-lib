@@ -14,7 +14,7 @@ import {
   updateAlignedWordsFromOriginalWordList
 } from "./migrateOriginalLanguageHelpers";
 import Lexer from "wordmap-lexer";
-import { getVerseSpanRange } from './verseObjects';
+import { getVerseSpanRange } from '../utils/verseObjects';
 
 /**
  * get all the alignments for verse from nested array (finds zaln objects)
@@ -465,7 +465,11 @@ function handleDeletedWords(verseAlignments, targetWordList, targetWords) {
  * @param {string} newTargetVerse
  */
 export function updateAlignmentsToTargetVerse(targetVerseObjects, newTargetVerse) {
-  let targetVerseText = convertVerseDataToUSFM(targetVerseObjects);
+  let targetVerseText = targetVerseObjects
+  if (typeof targetVerseObjects !== 'string') {
+    targetVerseText = convertVerseDataToUSFM(targetVerseObjects)
+  }
+
   let { targetWords, verseAlignments } = parseUsfmToWordAlignerData(targetVerseText, null);
   const targetTokens = getWordListFromVerseObjects(usfmVerseToJson(newTargetVerse));
   handleAddedWordsInNewText(targetTokens, targetWords, verseAlignments);

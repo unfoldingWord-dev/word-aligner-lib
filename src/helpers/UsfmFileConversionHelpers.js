@@ -2,15 +2,8 @@
 import usfmjs from 'usfm-js';
 import cloneDeep from "lodash.clonedeep";
 import {getVerseAlignments, getWordCountInVerse} from "./alignmentHelpers";
-
-/**
- * test to see if verse is a verseSpan
- * @param {string|number} verse
- * @return {boolean}
- */
-export function isVerseSpan(verse) {
-  return verse.toString().includes('-');
-}
+import { getBestVerseFromBook } from '../helpers/verseHelpers'
+import { removeUsfmMarkers } from './usfmHelpers'
 
 /**
  * called in case of invalid alignment that is not valid for the verse span, Sets alignment occurrence to high value

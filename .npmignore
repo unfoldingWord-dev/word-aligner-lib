@@ -9,3 +9,4 @@ styleguide.styles.js
 yalc.lock
 coverage/
 node_modules/
+dist/
